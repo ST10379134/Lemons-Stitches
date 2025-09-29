@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lemons &amp; Stitches</title>
+</head>
+<body>
+    <a href="Lemons & Stitches.html" class="back-button">← Home</a>
+    <header>
+        <h1>🍋 Lemons &amp; Stitches</h1>
+        <link rel="stylesheet" href="style.css">
+        <p>Empowering Knitwear Creatives Online</p>
+    </header>
+    <nav>
+        <a href="Lemons & Stitches.html">Home</a>
+        <a href="About us.html">About Us</a>
+        <a href="Shop page.html">Shop page</a>
+        <a href="New Stitches.html">New Stitches</a>
+        <a href="Account Dashboard.html">Account Dashboard</a>
+    </nav>
+    <form class="search-container" onsubmit="return false;">
+    <input type="text" id="searchBox" placeholder="search" name="query" required onkeyup="showSuggestions(this.value)">
+    <button type="submit">🔍</button>
+    <div id="suggestions"></div>
+</form>
+     <form action="Account Dashboard.html">
+                <button type="submit">Login</button>
+            </form>
+
+    <main>
+        <h1>Digital Products</h1>
+        <section class="product-grid">
+
+      <div class="product-card">
+        <img src="_images/IMG_9079.png" width="250"/>
+        <h3>Knitting patterns (with written notes)</h3>
+        <p class="price">R199.00</p>
+        <button onclick="addToCart('patterns', 199.00)">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img src="_images/the-vogue-knitting-book-1024x684.png" width="250"/>
+        <h3>Knitting book</h3>
+        <p class="price">R1499.00</p>
+        <button onclick="addToCart('Textbook', 1499.00)">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img src="_images/gather-here-classes-Knitting-Basics-Default-gather-here-online.png" width="250"/>
+        <h3>3-day knitting course</h3>
+        <p class="price">R2499.00</p>
+        <button onclick="addToCart('course ticket', 2499.00)">Add to Cart</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Lemons & Stitches</p>
+  </footer>
+
+  <!-- Add to Cart Script -->
+  <script>
+    function addToCart(name, price) {
+      const product = {
+        name: name,
+        price: price,
+        quantity: 1
+      };
+
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      const existing = cart.find(item => item.name === product.name);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push(product);
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      window.location.href = "Cart.html";
+    }
+  </script>
+    </main>
+    <footer>
+        <p>© 2025 Lemons &amp; Stitches</p>
+</footer>
+
+<script src="search.js"></script>
+
+</body>
+</html>

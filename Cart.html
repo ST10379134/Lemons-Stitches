@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cart Lemons & Stitches</title>
+</head>
+<!-- This page was AI generated as it required JavaScript knowledge I could not understand -->
+<body>
+ <a href="Lemons & Stitches.html" class="back-button">← Home</a>
+
+  <header>
+    <h1>🍋 Lemons & Stitches</h1>
+    <link rel="stylesheet" href="style.css">
+    <p>Empowering Knitwear Creatives Online</p>
+  </header>
+
+  <nav>
+    <a href="Lemons & Stitches.html">Home</a>
+    <a href="About us.html">About Us</a>
+    <a href="Shop page.html">Shop page</a>
+    <a href="New Stitches.html">New Stitches</a>
+    <a href="Account Dashboard.html">Account Dashboard</a>
+  </nav>
+
+  <form class="search-container" onsubmit="return false;">
+    <input type="text" id="searchBox" placeholder="search" name="query" required onkeyup="showSuggestions(this.value)">
+    <button type="submit">🔍</button>
+    <div id="suggestions"></div>
+</form>
+
+  <h1>Your Cart</h1>
+
+  <div class="cart-container" id="cartContainer">
+    <!-- Cart items will be dynamically injected here -->
+  </div>
+
+  <script>
+    // Load cart items from localStorage
+    let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const cartContainer = document.getElementById("cartContainer");
+
+    function renderCart() {
+      cartContainer.innerHTML = "";
+
+      if (cartItems.length === 0) {
+        cartContainer.innerHTML = "<p class='empty-message'>Your cart is currently empty.</p>";
+        return;
+      }
+
+      let total = 0;
+
+      cartItems.forEach((item, index) => {
+        total += item.price * item.quantity;
+
+        const cartItem = document.createElement("div");
+        cartItem.className = "cart-item";
+        cartItem.innerHTML = `
+          <div class="item-info">
+            <h3>${item.name}</h3>
+            <p>Price: R${item.price.toFixed(2)}</p>
+          </div>
+          <div class="quantity">
+            <label>Qty:</label>
+            <input type="number" min="1" value="${item.quantity}" data-index="${index}" />
+          </div>
+          <button class="remove-btn" data-index="${index}">Remove</button>
+        `;
+        cartContainer.appendChild(cartItem);
+      });
+
+      const totalEl = document.createElement("div");
+      totalEl.className = "cart-total";
+      totalEl.innerHTML = `<strong>Total: R${total.toFixed(2)}</strong>`;
+      cartContainer.appendChild(totalEl);
+
+      const checkoutBtn = document.createElement("button");
+      checkoutBtn.className = "checkout-btn";
+      checkoutBtn.textContent = "Proceed to Checkout";
+      cartContainer.appendChild(checkoutBtn);
+
+      addEventListeners();
+    }
+
+    function addEventListeners() {
+      document.querySelectorAll(".remove-btn").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          const index = this.getAttribute("data-index");
+          cartItems.splice(index, 1);
+          updateCart();
+        });
+      });
+
+      document.querySelectorAll(".quantity input").forEach((input) => {
+        input.addEventListener("change", function () {
+          const index = this.getAttribute("data-index");
+          let newQty = parseInt(this.value);
+          if (isNaN(newQty) || newQty < 1) newQty = 1;
+          cartItems[index].quantity = newQty;
+          updateCart();
+        });
+      });
+    }
+
+    function updateCart() {
+      localStorage.setItem("cart", JSON.stringify(cartItems));
+      renderCart();
+    }
+
+    renderCart();
+  </script>
+  <footer>
+        <p>© 2025 Lemons &amp; Stitches</p>
+    </footer>
+
+<script src="search.js"></script>
+
+</body>
+</html>
