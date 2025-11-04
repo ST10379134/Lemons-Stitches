@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lemons & Stitches</title>
+</head>
+<body>
+
+  <a href="Lemons & Stitches.html" class="back-button">← Home</a>
+
+  <header>
+    <h1>🍋 Lemons & Stitches</h1>
+    <link rel="stylesheet" href="style.css">
+    <p>Empowering Knitwear Creatives Online</p>
+  </header>
+
+  <nav>
+    <a href="Lemons & Stitches.html">Home</a>
+    <a href="About us.html">About Us</a>
+    <a href="Shop page.html">Shop page</a>
+    <a href="New Stitches.html">New Stitches</a>
+    <a href="Account Dashboard.html">Account Dashboard</a>
+  </nav>
+
+  <form class="search-container" onsubmit="return false;">
+    <input type="text" id="searchBox" placeholder="search" name="query" required onkeyup="showSuggestions(this.value)">
+    <button type="submit">🔍</button>
+    <div id="suggestions"></div>
+</form>
+
+  <main>
+    <h1>Handmade Knitwear</h1>
+    <section class="product-grid">
+       <form action="Account Dashboard.html">
+            <button type="submit">Login</button>
+        </form>
+
+      <div class="product-card">
+        <img src="_images/rib-knit-hat-toffee-stripe-7-a.jpg" width="250"/>
+        <h3>Striped Knit Beanie</h3>
+        <p class="price">R199.00</p>
+        <button onclick="addToCart('Striped Knit Beanie', 199.00)">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img src="_images/il_fullxfull.3492419362_4ige.png" width="250"/>
+        <h3>Chunky Wool Scarf</h3>
+        <p class="price">R349.00</p>
+        <button onclick="addToCart('Chunky Wool Scarf', 349.00)">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
+        <img src="_images/handmade-oversized-cardigan-with-rainbow-and-cloud---blue-89278505424473_m.jpg" width="250"/>
+        <h3>Handmade Cardigan</h3>
+        <p class="price">R799.00</p>
+        <button onclick="addToCart('Handmade Cardigan', 799.00)">Add to Cart</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Lemons & Stitches</p>
+  </footer>
+
+  <script src="search.js"></script>
+
+  <!-- Add to Cart Script -->
+  <script>
+    function addToCart(name, price) {
+      const product = {
+        name: name,
+        price: price,
+        quantity: 1
+      };
+
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      const existing = cart.find(item => item.name === product.name);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push(product);
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      // Redirect to cart page
+      window.location.href = "Cart.html";
+    }
+  </script>
+
+</body>
+</html>
